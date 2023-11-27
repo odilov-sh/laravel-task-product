@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
+use Gate;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProductController extends Controller
 {
@@ -27,6 +29,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Product::class);
         $product = new Product();
         return view('product.create', compact('product'));
     }
@@ -34,10 +37,11 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param ProductRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(ProductRequest $request)
     {
+        Gate::authorize('create', Product::class);
         $data = $request->validated();
         Product::create($data);
         return to_route('products.index')
@@ -59,6 +63,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        Gate::authorize('update', $product);
         return view('product.edit', ['product' => $product]);
     }
 
@@ -66,10 +71,11 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      * @param ProductRequest $request
      * @param Product $product
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(ProductRequest $request, Product $product)
     {
+        Gate::authorize('update', $product);
         $data = $request->validated();
         $product->update($data);
         return to_route('products.index', $product)
@@ -79,10 +85,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      * @param Product $product
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Product $product)
     {
+        Gate::authorize('delete', $product);
         $product->delete();
         return to_route('products.index',)
             ->with('warning', 'Product has been deleted');

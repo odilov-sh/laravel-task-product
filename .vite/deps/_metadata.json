@@ -1,0 +1,23 @@
+{
+  "hash": "acd02c27",
+  "browserHash": "88497803",
+  "optimized": {
+    "alpinejs": {
+      "src": "../../node_modules/alpinejs/dist/module.esm.js",
+      "file": "alpinejs.js",
+      "fileHash": "1c40426a",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "8c3d8405",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-SSYGV25P": {
+      "file": "chunk-SSYGV25P.js"
+    }
+  }
+}
