@@ -22,6 +22,7 @@
                     <th>Title</th>
                     <th>Quntity</th>
                     <th>Price</th>
+                    <th>Total price with VAT</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -32,6 +33,7 @@
                         <td><?php echo e($product->title); ?></td>
                         <td><?php echo e($product->quantity); ?></td>
                         <td><?php echo e($product->price); ?></td>
+                        <td><?php echo e($product->total_price_with_vat); ?></td>
                         <td>
                             <a href="<?php echo e(route('products.edit', $product)); ?>" class="btn btn-primary btn-sm">Edit</a>
                             <a href="<?php echo e(route('products.destroy', $product)); ?>" class="btn btn-danger btn-sm delete-link">Delete</a>

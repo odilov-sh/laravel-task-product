@@ -28,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Product whereQuantity($value)
  * @method static Builder|Product whereTitle($value)
  * @method static Builder|Product whereUpdatedAt($value)
+ * @property-read float|int $total_price_with_vat
  * @mixin Eloquent
  */
 class Product extends Model
@@ -39,5 +40,21 @@ class Product extends Model
     protected static function newFactory()
     {
         return ProductFactory::new();
+    }
+
+    /**
+     * @return float
+     */
+    public function getVatFromConfig(): float
+    {
+        return (float)config('my.products.vat');
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getTotalPriceWithVatAttribute()
+    {
+        return ($this->quantity * $this->price) * (1 + $this->getVatFromConfig());
     }
 }
