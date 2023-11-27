@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Audit\Auditable;
 use Database\Factories\ProductFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,6 +35,7 @@ use Illuminate\Support\Carbon;
 class Product extends Model
 {
     use HasFactory;
+    use Auditable;
 
     protected $fillable = ['title', 'quantity', 'price'];
 
