@@ -51,6 +51,9 @@ trait Auditable
      */
     public function isEventAuditable(string $event): bool
     {
+        if (App::runningInConsole()){
+            return false;
+        }
         $events = config('my.audit.events', []);
         return in_array($event, $events);
     }

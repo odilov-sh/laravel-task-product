@@ -18,6 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+//        $t = request()->user()->createToken('user');
+//        dd($t->plainTextToken);
         $products = Product::paginate();
         $index = ( $products->currentPage() - 1) * $products->perPage() + 1;
         return view('product.index', compact('products', 'index'));
